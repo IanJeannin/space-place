@@ -4,7 +4,8 @@ using UnityEngine;
 
 public class PlayerCharacter : MonoBehaviour {
 
-    public Rigidbody2D myRigidBody;
+    [SerializeField]
+    Rigidbody2D myRigidBody;
     [SerializeField]
     private float speed=10;
 	// Use this for initialization
