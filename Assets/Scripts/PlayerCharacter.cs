@@ -7,37 +7,45 @@ public class PlayerCharacter : MonoBehaviour {
     [SerializeField]
     Rigidbody2D myRigidBody;
     [SerializeField]
-    private float speed=10;
-	// Use this for initialization
-	void Start ()
+    private float speed = 10;
+
+    private float moveInput;
+    // Use this for initialization
+    void Start()
     {
         Debug.Log("This is STARTA!");
-	}
-	
-	// Update is called once per frame
-	void Update ()
+    }
+
+    // Update is called once per frame
+    void Update()
     {
 
-        if(Input.GetKey(KeyCode.D))
-        {
-            //TODO: Move Character Right
-            myRigidBody.velocity = new Vector2(speed,0);
-            
-        }
-        
-        if (Input.GetKey(KeyCode.S))
-        {
-            myRigidBody.velocity = new Vector2(0, -speed);
-        }
-        else if (Input.GetKey(KeyCode.A))
-        {
-            myRigidBody.velocity = new Vector2(-speed, 0);
-        }
-        else if (Input.GetKey(KeyCode.W))
-        {
-            myRigidBody.velocity = new Vector2(0, speed);
-        }
-        //This is the syntax for printing to the console
-        //Debug.Log("Hello World");
+        GetMovementInput();
+
     }
+
+    private void FixedUpdate()
+    {
+        Move();
+    }
+
+    private void Move()
+    {
+        //Don't use, because we are using Physics
+        //transform.Translate(1, 0, 0);
+        myRigidBody.velocity = new Vector2(moveInput*speed, myRigidBody.velocity.y);
+        
+    }
+
+    private void GetMovementInput()
+    {
+       moveInput=Input.GetAxis("Horizontal");
+    }
+
+    private void Jump()
+    {
+        //TODO Make Jump
+    }
+
 }
+
