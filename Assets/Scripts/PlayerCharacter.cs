@@ -21,7 +21,20 @@ public class PlayerCharacter : MonoBehaviour {
             myRigidBody.velocity = new Vector2(5,0);
             
         }
+        
+        if (Input.GetKey(KeyCode.S))
+        {
+            myRigidBody.velocity = new Vector2(0, -5);
+        }
+        else if (Input.GetKey(KeyCode.A))
+        {
+            myRigidBody.velocity = new Vector2(-5, 0);
+        }
+        else if (Input.GetKey(KeyCode.W))
+        {
+            myRigidBody.velocity = new Vector2(0, 5);
+        }
         //This is the syntax for printing to the console
         //Debug.Log("Hello World");
-	}
+    }
 }
