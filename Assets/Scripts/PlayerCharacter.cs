@@ -5,11 +5,11 @@ using UnityEngine;
 public class PlayerCharacter : MonoBehaviour {
 
     [SerializeField]
-    Rigidbody2D myRigidBody;
+    Rigidbody2D rb2d;
     [SerializeField]
-    private float speed = 10;
+    private float accelerationForce = 10;
 
-    private float moveInput;
+    private float horizontalInput;
     // Use this for initialization
     void Start()
     {
@@ -33,13 +33,14 @@ public class PlayerCharacter : MonoBehaviour {
     {
         //Don't use, because we are using Physics
         //transform.Translate(1, 0, 0);
-        myRigidBody.velocity = new Vector2(moveInput*speed, myRigidBody.velocity.y);
-        
+        // myRigidBody.velocity = new Vector2(horizontalInput*speed, myRigidBody.velocity.y);
+        rb2d.AddForce(Vector2.right * horizontalInput * accelerationForce);
     }
 
     private void GetMovementInput()
     {
-       moveInput=Input.GetAxis("Horizontal");
+       horizontalInput=Input.GetAxis("Horizontal");
+        
     }
 
     private void Jump()
