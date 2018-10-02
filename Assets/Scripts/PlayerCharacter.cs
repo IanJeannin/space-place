@@ -8,6 +8,8 @@ public class PlayerCharacter : MonoBehaviour {
     Rigidbody2D rb2d;
     [SerializeField]
     private float accelerationForce = 10;
+    [SerializeField]
+    private float maxSpeed;
 
     private float horizontalInput;
     // Use this for initialization
@@ -35,6 +37,9 @@ public class PlayerCharacter : MonoBehaviour {
         //transform.Translate(1, 0, 0);
         // myRigidBody.velocity = new Vector2(horizontalInput*speed, myRigidBody.velocity.y);
         rb2d.AddForce(Vector2.right * horizontalInput * accelerationForce);
+        Vector2 clampedVelocity = rb2d.velocity;
+        clampedVelocity.x = Mathf.Clamp(rb2d.velocity.x, -maxSpeed, maxSpeed);
+        rb2d.velocity = clampedVelocity;
     }
 
     private void GetMovementInput()
