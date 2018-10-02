@@ -10,19 +10,17 @@ public class PlayerCharacter : MonoBehaviour {
     private float accelerationForce = 10;
     [SerializeField]
     private float maxSpeed;
+    [SerializeField]
+    private float jumpForce=10;
 
     private float horizontalInput;
-    // Use this for initialization
-    void Start()
-    {
-        Debug.Log("This is STARTA!");
-    }
 
     // Update is called once per frame
     void Update()
     {
 
         GetMovementInput();
+        Jump();
 
     }
 
@@ -36,6 +34,7 @@ public class PlayerCharacter : MonoBehaviour {
         //Don't use, because we are using Physics
         //transform.Translate(1, 0, 0);
         // myRigidBody.velocity = new Vector2(horizontalInput*speed, myRigidBody.velocity.y);
+
         rb2d.AddForce(Vector2.right * horizontalInput * accelerationForce);
         Vector2 clampedVelocity = rb2d.velocity;
         clampedVelocity.x = Mathf.Clamp(rb2d.velocity.x, -maxSpeed, maxSpeed);
@@ -51,6 +50,10 @@ public class PlayerCharacter : MonoBehaviour {
     private void Jump()
     {
         //TODO Make Jump
+        if (Input.GetButtonDown("Jump"))
+        {
+            rb2d.AddForce(Vector2.up*jumpForce, ForceMode2D.Impulse);
+        }
     }
 
 }
