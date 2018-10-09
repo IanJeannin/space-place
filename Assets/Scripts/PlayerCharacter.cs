@@ -11,15 +11,21 @@ public class PlayerCharacter : MonoBehaviour {
     [SerializeField]
     private float maxSpeed;
     [SerializeField]
-    private float jumpForce=10;
+    private float jumpForce = 10;
     [SerializeField]
     ContactFilter2D groundContactFilter;
     [SerializeField]
     private Collider2D groundDetectTrigger;
+    [SerializeField]
+    private PhysicsMaterial2D playerMovingPhysicsMaterial;
+    [SerializeField]
+    private PhysicsMaterial2D playerStoppingPhysicsMaterial;
+    [SerializeField]
+    private Collider2D playerGroundCollider;
 
     private float horizontalInput;
     private bool isOnGround;
-    private Collider2D[] groundHitDetectionResults= new Collider2D[16];
+    private Collider2D[] groundHitDetectionResults = new Collider2D[16];
 
     // Update is called once per frame
     void Update()
@@ -27,13 +33,28 @@ public class PlayerCharacter : MonoBehaviour {
         UpdateIsOnGround();
         GetMovementInput();
         Jump();
-       
+
+
     }
 
     private void FixedUpdate()
     {
         Move();
+        UpdatePhysicsMaterial();
     }
+
+    private void UpdatePhysicsMaterial()
+    {
+        if(Mathf.Abs(horizontalInput)>0)
+        {
+            playerGroundCollider.sharedMaterial = playerMovingPhysicsMaterial;
+        }
+        else
+        {
+            playerGroundCollider.sharedMaterial = playerStoppingPhysicsMaterial;
+        }
+    }
+
 
     private void UpdateIsOnGround()
     {
@@ -55,7 +76,7 @@ public class PlayerCharacter : MonoBehaviour {
 
     private void GetMovementInput()
     {
-       horizontalInput=Input.GetAxis("Horizontal");
+       horizontalInput=Input.GetAxisRaw("Horizontal");
         
     }
 
