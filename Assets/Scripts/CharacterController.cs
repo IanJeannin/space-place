@@ -8,6 +8,10 @@ public class CharacterController : MonoBehaviour {
     private float maxSpeed = 10f;
     private bool isFacingRight = true;
     private bool isOnGround;
+    public Transform groundCheck;
+    float groundRadius=0.2f;
+    public LayerMask whatIsGround;
+
 
     Animator anim;
 
@@ -21,6 +25,10 @@ public class CharacterController : MonoBehaviour {
 	// Update is called once per frame
 	void FixedUpdate ()
     {
+
+        isOnGround = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround);
+        anim.SetBool("Ground", isOnGround);
+
         float move = Input.GetAxis("Horizontal");
         anim.SetFloat("Speed", Mathf.Abs(move));
 
