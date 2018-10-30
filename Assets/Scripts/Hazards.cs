@@ -7,11 +7,12 @@ public class Hazards : MonoBehaviour {
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
-        if(collision.gameObject.CompareTag("Player"))
+        if(collision.gameObject.CompareTag("Player")) //If an object with the tag "Player" collides with this object
         {
-            Debug.Log("Player entered Hazard");
+            Debug.Log("Player entered Hazard"); //Test Line
             CharacterController player = collision.GetComponent<CharacterController>();
-            player.Respawn();
+            player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0); //Make character stop moving. (NOT WORKING)
+            player.Respawn(); //Respawn in Character Controller
         }
         /*
         else

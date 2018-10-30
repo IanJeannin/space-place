@@ -16,7 +16,7 @@ public class CharacterController : MonoBehaviour {
     float groundRadius=0.2f;  //Radius of the ground
     public LayerMask whatIsGround; //LayerMask for determining ground
     private Checkpoints currentCheckpoint;
-
+    private float softLock=0; //Used to temporarily halt the player when they respawn
 
     Animator anim; //The animator
 
@@ -39,7 +39,15 @@ public class CharacterController : MonoBehaviour {
         float move = Input.GetAxis("Horizontal"); //Determines which direction character is moving in
         anim.SetFloat("Speed", Mathf.Abs(move)); //Changes animation to new movement
 
-        GetComponent<Rigidbody2D>().velocity = new Vector2(move * maxSpeed, GetComponent<Rigidbody2D>().velocity.y); //Changes the velocity of the character
+        if(softLock==0) //If player just respawned
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(move * maxSpeed, GetComponent<Rigidbody2D>().velocity.y); //Changes the velocity of the character
+        }
+        else
+        {
+            softLock--;
+        }
+        
 
         //Changes the animation if the player switches direction
         if (move>0&&!isFacingRight) 
@@ -70,17 +78,30 @@ public class CharacterController : MonoBehaviour {
         transform.localScale = theScale;
     }
 
+    public void SetCurrentCheckpoint(Checkpoints newCurrentCheckpoint) //Changes current checkpoint when player walks through checkpoint.
+    {
+        if (currentCheckpoint != null) //If there is already a checkpoint
+        {
+            currentCheckpoint.SetIsActivated(false); //Set that checkpoint to false
+        }
+
+        currentCheckpoint = newCurrentCheckpoint; //Make current checkpoint equal the new checkpoint
+        currentCheckpoint.SetIsActivated(true); //Activate checkpoint
+    }
+
     public void Respawn()
     {
 
-        if (currentCheckpoint == null)
+        if (currentCheckpoint == null) //If there is no current checkpoint
         {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name); //Reload the Scene
         }
-        else
+        else //If there is a current checkpoint
         {
-            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
-            transform.position = currentCheckpoint.transform.position;
+            Debug.Log("Character Respawned");
+            softLock = 50; //Stops the player from moving for 50 seconds
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0,0); //Set the players velocity to 0 !!!!!!!NOT WORKING ATM
+            transform.position = currentCheckpoint.transform.position; //Transfer player to checkpoint position
         }
     }
 

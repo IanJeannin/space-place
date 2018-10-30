@@ -71,9 +71,9 @@ public class Checkpoints : MonoBehaviour
         if (collision.CompareTag("Player")&&isActivated==false)
         {
             Debug.Log("Player entered Checkpoint");
-            PlayerCharacter player = collision.GetComponent<PlayerCharacter>();
+            CharacterController player = collision.GetComponent<CharacterController>();
             player.SetCurrentCheckpoint(this);
-            audioSource.Play();
+            //audioSource.Play();
         }
     }
 
