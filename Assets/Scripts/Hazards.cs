@@ -10,13 +10,15 @@ public class Hazards : MonoBehaviour {
         if(collision.gameObject.CompareTag("Player"))
         {
             Debug.Log("Player entered Hazard");
-            PlayerCharacter player = collision.GetComponent<PlayerCharacter>();
+            CharacterController player = collision.GetComponent<CharacterController>();
             player.Respawn();
         }
+        /*
         else
         {
             Debug.Log("Something other than the player entered the Hazard.");
         }
+        */
         
     }
 }

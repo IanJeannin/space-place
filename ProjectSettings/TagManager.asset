@@ -15,7 +15,7 @@ TagManager:
   - 
   - Ground
   - Player
-  - 
+  - HazardsAndEffects
   - 
   - 
   - 
@@ -40,4 +40,13 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: Ground
+    uniqueID: 2719755825
+    locked: 0
+  - name: Hazards
+    uniqueID: 2548221231
+    locked: 0
+  - name: Effects
+    uniqueID: 1412781563
     locked: 0

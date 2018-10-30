@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 public class CharacterController : MonoBehaviour {
 
@@ -14,6 +15,7 @@ public class CharacterController : MonoBehaviour {
     public Transform groundCheck; //Circle collider trigger to determine whether player is touching ground
     float groundRadius=0.2f;  //Radius of the ground
     public LayerMask whatIsGround; //LayerMask for determining ground
+    private Checkpoints currentCheckpoint;
 
 
     Animator anim; //The animator
@@ -67,4 +69,19 @@ public class CharacterController : MonoBehaviour {
         theScale.x *= -1;
         transform.localScale = theScale;
     }
+
+    public void Respawn()
+    {
+
+        if (currentCheckpoint == null)
+        {
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
+        }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = Vector2.zero;
+            transform.position = currentCheckpoint.transform.position;
+        }
+    }
+
 }
