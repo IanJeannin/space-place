@@ -16,7 +16,8 @@ public class CharacterController : MonoBehaviour {
     float groundRadius=0.2f;  //Radius of the ground
     public LayerMask whatIsGround; //LayerMask for determining ground
     private Checkpoints currentCheckpoint;
-    private float softLock=0; //Used to temporarily halt the player when they respawn
+    private float deathTime=0; //Used to temporarily halt the player when they respawn
+    private bool isInDeath = false; //Used to determine whether the death animation is playing
 
     Animator anim; //The animator
 
@@ -34,39 +35,51 @@ public class CharacterController : MonoBehaviour {
         isOnGround = Physics2D.OverlapCircle(groundCheck.position, groundRadius, whatIsGround); //Check if the character is on the ground
         anim.SetBool("Ground", isOnGround);
 
-        anim.SetFloat("VSpeed", GetComponent<Rigidbody2D>().velocity.y); 
+        anim.SetFloat("VSpeed", GetComponent<Rigidbody2D>().velocity.y);
 
-        float move = Input.GetAxis("Horizontal"); //Determines which direction character is moving in
-        anim.SetFloat("Speed", Mathf.Abs(move)); //Changes animation to new movement
-
-        if(softLock==0) //If player just respawned
+        if (Time.realtimeSinceStartup - deathTime >= 3.5 || deathTime == 0) //If four seconds have passed since respawn was called
         {
+            float move = Input.GetAxis("Horizontal"); //Determines which direction character is moving in
+            anim.SetFloat("Speed", Mathf.Abs(move)); //Changes animation to new movement
+
+
             GetComponent<Rigidbody2D>().velocity = new Vector2(move * maxSpeed, GetComponent<Rigidbody2D>().velocity.y); //Changes the velocity of the character
-        }
-        else
-        {
-            softLock--;
-        }
-        
+            deathTime = 0; //Reset deathTime to 0 once respawn is finished
 
-        //Changes the animation if the player switches direction
-        if (move>0&&!isFacingRight) 
-        {
-            Flip();
-        }
-        if(move<0&&isFacingRight)
-        {
-            Flip();
-        }
 
+
+            //Changes the animation if the player switches direction
+            if (move > 0 && !isFacingRight)
+            {
+                Flip();
+            }
+            if (move < 0 && isFacingRight)
+            {
+                Flip();
+            }
+
+        }
     }
 
     private void Update()
     {
-        if (isOnGround && Input.GetButtonDown("Jump")) //If the player is on the ground and presses the jump button
+        if (Time.time - deathTime >= 3.5 || deathTime == 0) //If four seconds have passed since respawn was called
         {
-            anim.SetBool("Ground", false); //Player is no longer on the ground
-            GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce)); //Add upwards force ot the character
+            if (isOnGround && Input.GetButtonDown("Jump")) //If the player is on the ground and presses the jump button
+            {
+                anim.SetBool("Ground", false); //Player is no longer on the ground
+                GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce)); //Add upwards force ot the character
+            }
+            deathTime = 0; //Once the player is able to move again, reset deathTime to 0
+        }
+
+        if (isInDeath == true) //Checks if StartRespawn has been called
+        {
+            anim.SetBool("IsDead", true); //When Respawn is called, set the "IsDead" parameter to true
+            if (Time.realtimeSinceStartup - deathTime >= 3) //Once three seconds have passed
+            {
+                Respawn();
+            }
         }
     }
 
@@ -89,20 +102,27 @@ public class CharacterController : MonoBehaviour {
         currentCheckpoint.SetIsActivated(true); //Activate checkpoint
     }
 
+    public void StartRespawn()
+    {
+        isInDeath = true;
+
+        deathTime = Time.realtimeSinceStartup; //Set the current time for deathTime
+    }
     public void Respawn()
     {
-
-        if (currentCheckpoint == null) //If there is no current checkpoint
-        {
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name); //Reload the Scene
+        isInDeath = false;
+            if (currentCheckpoint == null) //If there is no current checkpoint
+            {
+                SceneManager.LoadScene(SceneManager.GetActiveScene().name); //Reload the Scene
+            }
+            else //If there is a current checkpoint
+            {
+                Debug.Log("Character Respawned");
+                transform.position = currentCheckpoint.transform.position; //Transfer player to checkpoint position
+                anim.SetBool("IsDead", false);
         }
-        else //If there is a current checkpoint
-        {
-            Debug.Log("Character Respawned");
-            softLock = 50; //Stops the player from moving for 50 seconds
-            GetComponent<Rigidbody2D>().velocity = new Vector2(0,0); //Set the players velocity to 0 !!!!!!!NOT WORKING ATM
-            transform.position = currentCheckpoint.transform.position; //Transfer player to checkpoint position
-        }
+            
+       
     }
 
 }

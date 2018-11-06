@@ -12,7 +12,7 @@ public class Hazards : MonoBehaviour {
             Debug.Log("Player entered Hazard"); //Test Line
             CharacterController player = collision.GetComponent<CharacterController>();
             player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0); //Make character stop moving. (NOT WORKING)
-            player.Respawn(); //Respawn in Character Controller
+            player.StartRespawn(); //StartRespawn in Character Controller
         }
         /*
         else
