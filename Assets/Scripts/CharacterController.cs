@@ -72,6 +72,10 @@ public class CharacterController : MonoBehaviour {
             }
             deathTime = 0; //Once the player is able to move again, reset deathTime to 0
         }
+        else
+        {
+            GetComponent<Rigidbody2D>().velocity = new Vector2(0,0);
+        }
 
         if (isInDeath == true) //Checks if StartRespawn has been called
         {
@@ -80,6 +84,15 @@ public class CharacterController : MonoBehaviour {
             {
                 Respawn();
             }
+        }
+
+        if(Input.GetButton("Horizontal"))
+        {
+            anim.SetBool("IsMoving",true);
+        }
+        else
+        {
+            anim.SetBool("IsMoving", false);
         }
     }
 
