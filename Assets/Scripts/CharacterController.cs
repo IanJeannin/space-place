@@ -115,12 +115,11 @@ public class CharacterController : MonoBehaviour {
     public void StartRespawn()
     {
         isInDeath = true;
-
         deathTime = Time.realtimeSinceStartup; //Set the current time for deathTime
     }
     public void Respawn()
     {
-        isInDeath = false;
+           isInDeath = false;
             if (currentCheckpoint == null) //If there is no current checkpoint
             {
                 SceneManager.LoadScene(SceneManager.GetActiveScene().name); //Reload the Scene

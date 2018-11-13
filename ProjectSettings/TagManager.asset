@@ -16,7 +16,7 @@ TagManager:
   - Ground
   - Player
   - HazardsAndEffects
-  - 
+  - Background
   - 
   - 
   - 
@@ -41,6 +41,9 @@ TagManager:
   - name: Default
     uniqueID: 0
     locked: 0
+  - name: Background
+    uniqueID: 1401406247
+    locked: 0
   - name: Ground
     uniqueID: 2719755825
     locked: 0
@@ -49,4 +52,7 @@ TagManager:
     locked: 0
   - name: Effects
     uniqueID: 1412781563
+    locked: 0
+  - name: DoorsAndPickups
+    uniqueID: 1888704243
     locked: 0
