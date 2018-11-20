@@ -8,6 +8,8 @@ public class Door : MonoBehaviour {
     [SerializeField]
     private string sceneToLoad;
     private bool isUnlocked = false;
+    [SerializeField]
+    SoundManager sound;
 
     private bool isPlayerInTrigger;
     
@@ -50,6 +52,7 @@ public class Door : MonoBehaviour {
             this.gameObject.GetComponent<Collider2D>().enabled = true;
             if (Input.GetButtonDown("Activate") && isPlayerInTrigger)
             {
+                sound.DoorSound();
                 Debug.Log("Player activated Door!");
                 SceneManager.LoadScene(sceneToLoad);
             }

@@ -10,6 +10,8 @@ public class Pickups : MonoBehaviour {
     private float numberOfPickups = 1;
     [SerializeField]
     Door door;
+    [SerializeField]
+    SoundManager sound;
     //public Door door;
     // Use this for initialization
     void Start () {
@@ -40,6 +42,7 @@ public class Pickups : MonoBehaviour {
         if (collision.CompareTag("Player"))
         {
             numberOfPickups--;
+            sound.PickupSound();
             door.Unlock(); //Calls PickedUp method from Door class
             Debug.Log("Player picked up Object");
             this.gameObject.SetActive(false);

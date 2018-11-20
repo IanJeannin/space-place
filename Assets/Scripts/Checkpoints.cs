@@ -12,6 +12,9 @@ public class Checkpoints : MonoBehaviour
     [SerializeField]
     private Color inactivatedColor, activatedColor;
 
+    [SerializeField]
+    SoundManager sound;
+
     //Bools automatically start as false
     private bool isActivated;
     private SpriteRenderer spriteRenderer;
@@ -70,6 +73,7 @@ public class Checkpoints : MonoBehaviour
     {
         if (collision.CompareTag("Player")&&isActivated==false)
         {
+            sound.CheckpointSound();
             Debug.Log("Player entered Checkpoint");
             CharacterController player = collision.GetComponent<CharacterController>();
             player.SetCurrentCheckpoint(this);
