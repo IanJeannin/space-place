@@ -7,6 +7,7 @@ public class Door : MonoBehaviour {
 
     [SerializeField]
     private string sceneToLoad;
+    private bool isUnlocked = false;
 
     private bool isPlayerInTrigger;
     
@@ -42,10 +43,27 @@ public class Door : MonoBehaviour {
 
     private void Update()
     {
-        if(Input.GetButtonDown("Activate")&&isPlayerInTrigger)
+        
+        if (isUnlocked == true)
         {
-            Debug.Log("Player activated Door!");
-            SceneManager.LoadScene(sceneToLoad);
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            this.gameObject.GetComponent<Collider2D>().enabled = true;
+            if (Input.GetButtonDown("Activate") && isPlayerInTrigger)
+            {
+                Debug.Log("Player activated Door!");
+                SceneManager.LoadScene(sceneToLoad);
+            }
         }
+        else
+        {
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            this.gameObject.GetComponent<Collider2D>().enabled = false;
+        }
+    }
+
+    public void Unlock() //Function used to decrement toUnlock, called from Pickups
+    {
+        isUnlocked = true;
+        Debug.Log("Unlocked"+gameObject.name);
     }
 }
