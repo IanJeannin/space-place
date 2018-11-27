@@ -46,13 +46,13 @@ public class Door : MonoBehaviour {
     private void Update()
     {
         
-        if (isUnlocked == true)
+        if (isUnlocked == true) //If all the pickups are collected
         {
-            this.gameObject.GetComponent<SpriteRenderer>().enabled = true;
-            this.gameObject.GetComponent<Collider2D>().enabled = true;
-            if (Input.GetButtonDown("Activate") && isPlayerInTrigger)
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = true; //Enable the sprite
+            this.gameObject.GetComponent<Collider2D>().enabled = true; //Enable the collider
+            if (Input.GetButtonDown("Activate") && isPlayerInTrigger) //If the player is within the collider and presses e or up
             {
-                sound.DoorSound();
+                sound.DoorSound(); //Play door sound
                 Debug.Log("Player activated Door!");
                 SceneManager.LoadScene(sceneToLoad);
             }
