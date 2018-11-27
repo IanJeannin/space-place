@@ -15,6 +15,8 @@ public class Hazards : MonoBehaviour {
     {
         if (button.GetActive() == true) //So long as the button associated with this gate has not been pushed
         {
+            this.GetComponent<BoxCollider2D>().enabled = true; //Turns the collider back on if the button associated with this hazard was pushed twice. 
+
             if (transform.parent.name == "Hazards") //Used to only access the lazer image of the gate
             {
                 if (Time.time > timeToChange) //If the time since startup is a multiple of the time to change, change isOn
