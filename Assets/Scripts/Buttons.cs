@@ -7,6 +7,8 @@ public class Buttons : MonoBehaviour {
    
     private bool isPlayerInTrigger; //Checks if player character is currently within the trigger
     private bool isActive=true; //Checks if button has yet to be pressed
+    [SerializeField]
+    SoundManager sound;
 
     private void OnTriggerEnter2D(Collider2D collision) //If an object enters the collider
     {
@@ -28,6 +30,7 @@ public class Buttons : MonoBehaviour {
     {
         if (Input.GetButtonDown("Activate") && isPlayerInTrigger) //If the player clicks the interact key while inside the collider
         {
+            sound.ButtonSound();
             if(isActive==true) //If the button hasn't been pressed
             {
                 Debug.Log("Player activated Button!");

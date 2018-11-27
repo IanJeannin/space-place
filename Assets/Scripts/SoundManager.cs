@@ -27,4 +27,19 @@ public class SoundManager : MonoBehaviour {
         audio.PlayOneShot(Resources.Load<AudioClip>("NextLevelSound"));
     }
 
+    public void ButtonSound()
+    {
+        audio.PlayOneShot(Resources.Load<AudioClip>("Clicks_13"));
+    }
+
+    public void JumpSound()
+    {
+        audio.PlayOneShot(Resources.Load<AudioClip>("Landing_01"));
+    }
+
+    public void DeathSound()
+    {
+        audio.PlayOneShot(Resources.Load<AudioClip>("Male_Death_04"));
+    }
+
 }

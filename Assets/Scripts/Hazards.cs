@@ -10,6 +10,8 @@ public class Hazards : MonoBehaviour {
     private float timeToAdd = 0.01f; //Add to timeToChange to continually change the hazards renderer
     [SerializeField]
     Buttons button; //Button associated with this gate
+    [SerializeField]
+    SoundManager sound;
 
     private void Update()
     {
@@ -68,6 +70,7 @@ public class Hazards : MonoBehaviour {
     {
         if(collision.gameObject.CompareTag("Player")) //If an object with the tag "Player" collides with this object
         {
+            sound.DeathSound();
             Debug.Log("Player entered Hazard"); //Test Line
             CharacterController player = collision.GetComponent<CharacterController>();
             player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0); //Make character stop moving.

@@ -15,7 +15,12 @@ public class CharacterController : MonoBehaviour {
     public Transform groundCheck; //Circle collider trigger to determine whether player is touching ground
     float groundRadius=0.2f;  //Radius of the ground
     public LayerMask whatIsGround; //LayerMask for determining ground
-    private Checkpoints currentCheckpoint;
+    [SerializeField]
+    Checkpoints firstCheckpoint;
+    [SerializeField]
+    SoundManager sound;
+
+    Checkpoints currentCheckpoint;
     private float deathTime=0; //Used to temporarily halt the player when they respawn
     private bool isInDeath = false; //Used to determine whether the death animation is playing
 
@@ -37,7 +42,7 @@ public class CharacterController : MonoBehaviour {
 
         anim.SetFloat("VSpeed", GetComponent<Rigidbody2D>().velocity.y);
 
-        if (Time.realtimeSinceStartup - deathTime >= 3.5 || deathTime == 0) //If four seconds have passed since respawn was called
+        if (Time.realtimeSinceStartup - deathTime >= 2.5 || deathTime == 0) //If four seconds have passed since respawn was called
         {
             float move = Input.GetAxis("Horizontal"); //Determines which direction character is moving in
             anim.SetFloat("Speed", Mathf.Abs(move)); //Changes animation to new movement
@@ -63,10 +68,11 @@ public class CharacterController : MonoBehaviour {
 
     private void Update()
     {
-        if (Time.time - deathTime >= 3.5 || deathTime == 0) //If four seconds have passed since respawn was called
+        if (Time.time - deathTime >= 2.5 || deathTime == 0) //If four seconds have passed since respawn was called
         {
             if (isOnGround && Input.GetButtonDown("Jump")) //If the player is on the ground and presses the jump button
             {
+                sound.JumpSound();
                 anim.SetBool("Ground", false); //Player is no longer on the ground
                 GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce)); //Add upwards force ot the character
             }
@@ -122,8 +128,10 @@ public class CharacterController : MonoBehaviour {
            isInDeath = false;
             if (currentCheckpoint == null) //If there is no current checkpoint
             {
-                SceneManager.LoadScene(SceneManager.GetActiveScene().name); //Reload the Scene
-            }
+            Debug.Log("Character Respawned");
+            transform.position = firstCheckpoint.transform.position; //Transfer player to checkpoint position
+            anim.SetBool("IsDead", false);
+        }
             else //If there is a current checkpoint
             {
                 Debug.Log("Character Respawned");
