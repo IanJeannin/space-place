@@ -13,7 +13,7 @@ public class CharacterController : MonoBehaviour {
     private bool isFacingRight = true;
     private bool isOnGround;
     public Transform groundCheck; //Circle collider trigger to determine whether player is touching ground
-    float groundRadius=0.2f;  //Radius of the ground
+    float groundRadius=0.1f;  //Radius of the ground
     public LayerMask whatIsGround; //LayerMask for determining ground
     [SerializeField]
     Checkpoints firstCheckpoint;

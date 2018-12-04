@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class Hazards : MonoBehaviour {
 
     private bool isOn = true; //Used to determine whether or not the hazard is currently showing
-    private float timeToChange = 0.01f; //Used to determine the time between hazard changing show state
-    private float timeToAdd = 0.01f; //Add to timeToChange to continually change the hazards renderer
+    private float timeToChange = .015f; //Used to determine the time between hazard changing show state
+    private float timeToAdd = 0.015f; //Add to timeToChange to continually change the hazards renderer
     [SerializeField]
     Buttons button; //Button associated with this gate
     [SerializeField]
