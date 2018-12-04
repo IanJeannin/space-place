@@ -6,8 +6,8 @@ using UnityEngine.SceneManagement;
 public class Hazards : MonoBehaviour {
 
     private bool isOn = true; //Used to determine whether or not the hazard is currently showing
-    private float timeToChange = .015f; //Used to determine the time between hazard changing show state
-    private float timeToAdd = 0.015f; //Add to timeToChange to continually change the hazards renderer
+    private float timeToChange = 0.02f; //Used to determine the time between hazard changing show state
+    private float timeToAdd = 0.02f; //Add to timeToChange to continually change the hazards renderer
     [SerializeField]
     Buttons button; //Button associated with this gate
     [SerializeField]
@@ -17,10 +17,11 @@ public class Hazards : MonoBehaviour {
     {
         if (button.GetActive() == true) //So long as the button associated with this gate has not been pushed
         {
+            
             this.GetComponent<BoxCollider2D>().enabled = true; //Turns the collider back on if the button associated with this hazard was pushed twice. 
-
             if (transform.parent.name == "Hazards") //Used to only access the lazer image of the gate
             {
+                
                 if (Time.time > timeToChange) //If the time since startup is a multiple of the time to change, change isOn
                 {
                     isOn = !isOn; //isOn equals whatever it's not
@@ -30,26 +31,25 @@ public class Hazards : MonoBehaviour {
                 if (isOn == true) //If isOn is true
                 {
                     SpriteRenderer[] hazard = GetComponentsInChildren<SpriteRenderer>(); //Get all rendrers in child objects
-                    foreach (Renderer x in hazard) //For every renderer in the child components
+                    foreach (SpriteRenderer x in hazard) //For every renderer in the child components
                     {
                         if (x.gameObject.transform.parent.name == "LazerGate" || transform.name == "FallDeath") //Checks that it's only getting the lazer parts of hazard
                         {
-                            x.enabled = true; //Let the hazard show
+                            Color alpha = x.color; //Make a color variable to hold sprite renderers color
+                            if(alpha.a==0f) //If the renderer alpha is 0
+                            {
+                                alpha.a = 1f; //Make it 1
+                            }
+                            else //If the renderer alpha is 1
+                            {
+                                alpha.a = 0f; //Make it 0
+                            }
+                            x.color = alpha;
                         }
-
+                        x.enabled = true;
                     }
                 }
-                else //Otherwise
-                {
-                    SpriteRenderer[] hazard = GetComponentsInChildren<SpriteRenderer>();
-                    foreach (Renderer x in hazard)
-                    {
-                        if (x.gameObject.transform.parent.name == "LazerGate" || transform.name == "FallDeath") //Checks that it's only getting the lazer parts of hazard
-                        {
-                            x.enabled = false; //Don't
-                        }
-                    }
-                }
+               
             }
         }
         else
@@ -76,12 +76,5 @@ public class Hazards : MonoBehaviour {
             player.GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0); //Make character stop moving.
             player.StartRespawn(); //StartRespawn in Character Controller
         }
-        /*
-        else
-        {
-            Debug.Log("Something other than the player entered the Hazard.");
-        }
-        */
-        
     }
 }

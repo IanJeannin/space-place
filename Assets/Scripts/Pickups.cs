@@ -47,8 +47,6 @@ public class Pickups : MonoBehaviour {
             Debug.Log("Player picked up Object");
             this.gameObject.SetActive(false);
             this.transform.GetComponentInChildren<ParticleSystem>().gameObject.SetActive(false);
-            
-
         }
     }
 }
