@@ -123,7 +123,7 @@ GameObject:
   - component: {fileID: 16751331}
   - component: {fileID: 16751330}
   m_Layer: 0
-  m_Name: EmptyButtonForFallDeath
+  m_Name: EmptyButton
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,6 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 085e1f08c5ff83f49841a8a006152c0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  isActive: 0
   sound: {fileID: 0}
 --- !u!4 &16751331
 Transform:
@@ -351,6 +352,16 @@ Prefab:
       propertyPath: sound
       value: 
       objectReference: {fileID: 692264979}
+    - target: {fileID: 114544927153037938, guid: 590b01c89a019f147bfefad304095356,
+        type: 2}
+      propertyPath: button2
+      value: 
+      objectReference: {fileID: 16751330}
+    - target: {fileID: 114544927153037938, guid: 590b01c89a019f147bfefad304095356,
+        type: 2}
+      propertyPath: onAtStartup
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 590b01c89a019f147bfefad304095356, type: 2}
   m_IsPrefabParent: 0
@@ -5885,11 +5896,11 @@ Prefab:
     m_Modifications:
     - target: {fileID: 4777439993534132, guid: 085e3a0192fac3249a94e8fdd1915316, type: 2}
       propertyPath: m_LocalPosition.x
-      value: 6.55
+      value: 6.48
       objectReference: {fileID: 0}
     - target: {fileID: 4777439993534132, guid: 085e3a0192fac3249a94e8fdd1915316, type: 2}
       propertyPath: m_LocalPosition.y
-      value: -10.11
+      value: -9.08
       objectReference: {fileID: 0}
     - target: {fileID: 4777439993534132, guid: 085e3a0192fac3249a94e8fdd1915316, type: 2}
       propertyPath: m_LocalPosition.z
@@ -15926,6 +15937,33 @@ Tilemap:
       m_ObjectToInstantiate: {fileID: 0}
       m_TileFlags: 1
       m_ColliderType: 1
+  - first: {x: 8, y: -5, z: 0}
+    second:
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 2
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
+  - first: {x: 9, y: -5, z: 0}
+    second:
+      m_TileIndex: 8
+      m_TileSpriteIndex: 8
+      m_TileMatrixIndex: 2
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
+  - first: {x: 10, y: -5, z: 0}
+    second:
+      m_TileIndex: 11
+      m_TileSpriteIndex: 11
+      m_TileMatrixIndex: 2
+      m_TileColorIndex: 0
+      m_ObjectToInstantiate: {fileID: 0}
+      m_TileFlags: 1
+      m_ColliderType: 1
   - first: {x: 18, y: -5, z: 0}
     second:
       m_TileIndex: 8
@@ -25439,12 +25477,14 @@ Tilemap:
     m_Data: {fileID: 11400000, guid: f37e0dc753f29cd4a8c2dfde125c9361, type: 2}
   - m_RefCount: 1
     m_Data: {fileID: 11400000, guid: f930a4c40b0988847b43e202320af50d, type: 2}
-  - m_RefCount: 12
+  - m_RefCount: 13
     m_Data: {fileID: 11400000, guid: e8117bf4962bf934cb0c345d36ead86a, type: 2}
   - m_RefCount: 16
     m_Data: {fileID: 11400000, guid: ee2cab31f6a09324d81778543d08df23, type: 2}
   - m_RefCount: 8
     m_Data: {fileID: 11400000, guid: eb8a4c2455f8c8a479c4d6a9e5b940a7, type: 2}
+  - m_RefCount: 2
+    m_Data: {fileID: 11400000, guid: 9ce5634564df242428d62416092c0e8b, type: 2}
   m_TileSpriteArray:
   - m_RefCount: 120
     m_Data: {fileID: 21300384, guid: 23dd4a1ce56cc7940ad4cb001310ad5b, type: 3}
@@ -25462,12 +25502,14 @@ Tilemap:
     m_Data: {fileID: 21300126, guid: 23dd4a1ce56cc7940ad4cb001310ad5b, type: 3}
   - m_RefCount: 1
     m_Data: {fileID: 21300386, guid: 23dd4a1ce56cc7940ad4cb001310ad5b, type: 3}
-  - m_RefCount: 12
+  - m_RefCount: 13
     m_Data: {fileID: 21300394, guid: 23dd4a1ce56cc7940ad4cb001310ad5b, type: 3}
   - m_RefCount: 16
     m_Data: {fileID: 21300120, guid: 23dd4a1ce56cc7940ad4cb001310ad5b, type: 3}
   - m_RefCount: 8
     m_Data: {fileID: 21300122, guid: 23dd4a1ce56cc7940ad4cb001310ad5b, type: 3}
+  - m_RefCount: 2
+    m_Data: {fileID: 21300388, guid: 23dd4a1ce56cc7940ad4cb001310ad5b, type: 3}
   m_TileMatrixArray:
   - m_RefCount: 248
     m_Data:
@@ -25505,7 +25547,7 @@ Tilemap:
       e31: 0
       e32: 0
       e33: 1
-  - m_RefCount: 1828
+  - m_RefCount: 1831
     m_Data:
       e00: 1
       e01: 0
@@ -25542,7 +25584,7 @@ Tilemap:
       e32: 0
       e33: 1
   m_TileColorArray:
-  - m_RefCount: 2129
+  - m_RefCount: 2132
     m_Data: {r: 1, g: 1, b: 1, a: 1}
   m_AnimationFrameRate: 1
   m_Color: {r: 1, g: 1, b: 1, a: 1}
@@ -25636,6 +25678,14 @@ CompositeCollider2D:
       - X: 180000000
         Y: 10000000
       - X: 180000000
+        Y: -50000000
+      - X: 110000000
+        Y: -50000000
+      - X: 110000000
+        Y: -40000000
+      - X: 80000000
+        Y: -40000000
+      - X: 80000000
         Y: -50000000
       - X: -10000000
         Y: -50000000
@@ -25750,6 +25800,10 @@ CompositeCollider2D:
       - {x: -31, y: 1}
       - {x: 18, y: 1}
       - {x: 18, y: -5}
+      - {x: 11, y: -5}
+      - {x: 11, y: -4}
+      - {x: 8, y: -4}
+      - {x: 8, y: -5}
       - {x: -1, y: -5}
       - {x: -1, y: -4}
       - {x: -2, y: -4}
@@ -28225,7 +28279,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   button: {fileID: 16751330}
+  button2: {fileID: 16751330}
   sound: {fileID: 692264979}
+  onAtStartup: 0
 --- !u!212 &2117373233
 SpriteRenderer:
   m_ObjectHideFlags: 0

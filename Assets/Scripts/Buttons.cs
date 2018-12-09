@@ -6,7 +6,8 @@ public class Buttons : MonoBehaviour {
 
    
     private bool isPlayerInTrigger; //Checks if player character is currently within the trigger
-    private bool isActive=true; //Checks if button has yet to be pressed
+    [SerializeField]
+    private bool isActive=false; //Checks if button been pressed, can be changed in editor so that button is inactive at start
     [SerializeField]
     SoundManager sound;
 

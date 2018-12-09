@@ -4,18 +4,20 @@ using UnityEngine;
 using UnityEngine.SceneManagement;
 
 public class Hazards : MonoBehaviour {
-
+    
     private bool isOn = true; //Used to determine whether or not the hazard is currently showing
     private float timeToChange = 0.02f; //Used to determine the time between hazard changing show state
     private float timeToAdd = 0.02f; //Add to timeToChange to continually change the hazards renderer
     [SerializeField]
-    Buttons button; //Button associated with this gate
+    Buttons button, button2; //Buttons associated with this gate
     [SerializeField]
     SoundManager sound;
+    [SerializeField]
+    private bool onAtStartup;
 
     private void Update()
     {
-        if (button.GetActive() == true) //So long as the button associated with this gate has not been pushed
+        if (button.GetActive() == onAtStartup && button2.GetActive() == onAtStartup) //So long as the button associated with this gate has not been pushed
         {
             
             this.GetComponent<BoxCollider2D>().enabled = true; //Turns the collider back on if the button associated with this hazard was pushed twice. 
