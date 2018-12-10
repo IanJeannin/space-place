@@ -140,7 +140,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 085e1f08c5ff83f49841a8a006152c0b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  isActive: 0
+  isActive: 1
   sound: {fileID: 0}
 --- !u!4 &16751331
 Transform:
@@ -509,9 +509,9 @@ Camera:
     height: 1
   near clip plane: 0.1
   far clip plane: 5000
-  field of view: 50
+  field of view: 40
   orthographic: 1
-  orthographic size: 4.85
+  orthographic size: 10
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -534,7 +534,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 364475287}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -30.49, y: -9.98, z: -10}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -729,6 +729,11 @@ Prefab:
     - target: {fileID: 4811055122561578, guid: 211a01edfa3fb14439b9eca91306fdec, type: 2}
       propertyPath: m_LocalScale.y
       value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 114271815921284432, guid: 211a01edfa3fb14439b9eca91306fdec,
+        type: 2}
+      propertyPath: isActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 211a01edfa3fb14439b9eca91306fdec, type: 2}
@@ -28281,7 +28286,7 @@ MonoBehaviour:
   button: {fileID: 16751330}
   button2: {fileID: 16751330}
   sound: {fileID: 692264979}
-  onAtStartup: 0
+  onAtStartup: 1
 --- !u!212 &2117373233
 SpriteRenderer:
   m_ObjectHideFlags: 0
