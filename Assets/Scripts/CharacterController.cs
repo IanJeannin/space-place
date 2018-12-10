@@ -82,7 +82,7 @@ public class CharacterController : MonoBehaviour {
         if (isInDeath == true) //Checks if StartRespawn has been called
         {
             anim.SetBool("IsDead", true); //When Respawn is called, set the "IsDead" parameter to true
-            if (Time.realtimeSinceStartup - deathTime >= 3) //Once three seconds have passed
+            if (Time.realtimeSinceStartup - deathTime >= 4) //Once three seconds have passed
             {
                 Respawn();
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
