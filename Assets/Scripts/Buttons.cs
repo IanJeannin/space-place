@@ -34,13 +34,11 @@ public class Buttons : MonoBehaviour {
             sound.ButtonSound();
             if(isActive==true) //If the button hasn't been pressed
             {
-                Debug.Log("Player activated Button!");
                 isActive = false;
                 GetComponent<SpriteRenderer>().enabled = false; //Hide the unpressed button renderer
             }
             else
             {
-                Debug.Log("Player has deactivatedButton!");
                 isActive = true;
                 GetComponent<SpriteRenderer>().enabled = true; //show the unpressed button renderer
             }

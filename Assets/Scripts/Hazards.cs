@@ -19,11 +19,10 @@ public class Hazards : MonoBehaviour {
     {
         if (button.GetActive() == onAtStartup && button2.GetActive() == onAtStartup) //So long as the button associated with this gate has not been pushed
         {
-            
             this.GetComponent<BoxCollider2D>().enabled = true; //Turns the collider back on if the button associated with this hazard was pushed twice. 
             if (transform.parent.name == "Hazards") //Used to only access the lazer image of the gate
             {
-                
+
                 if (Time.time > timeToChange) //If the time since startup is a multiple of the time to change, change isOn
                 {
                     isOn = !isOn; //isOn equals whatever it's not
@@ -38,7 +37,7 @@ public class Hazards : MonoBehaviour {
                         if (x.gameObject.transform.parent.name == "LazerGate" || transform.name == "FallDeath") //Checks that it's only getting the lazer parts of hazard
                         {
                             Color alpha = x.color; //Make a color variable to hold sprite renderers color
-                            if(alpha.a==0f) //If the renderer alpha is 0
+                            if (alpha.a == 0f) //If the renderer alpha is 0
                             {
                                 alpha.a = 1f; //Make it 1
                             }
@@ -51,7 +50,7 @@ public class Hazards : MonoBehaviour {
                         x.enabled = true;
                     }
                 }
-               
+
             }
         }
         else
@@ -62,7 +61,7 @@ public class Hazards : MonoBehaviour {
             {
                 if (x.gameObject.transform.parent.name == "LazerGate") //Checks that it's only getting the lazer parts of hazard
                 {
-                    x.enabled = false; //Don't
+                    x.enabled = false; //Turn off lazer images
                 }
             }
         }
