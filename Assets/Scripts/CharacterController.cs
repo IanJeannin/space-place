@@ -42,7 +42,7 @@ public class CharacterController : MonoBehaviour {
 
         anim.SetFloat("VSpeed", GetComponent<Rigidbody2D>().velocity.y);
 
-        if (Time.realtimeSinceStartup - deathTime >= 2.5 || deathTime == 0) //If four seconds have passed since respawn was called
+        if (Time.realtimeSinceStartup - deathTime >= 3 || deathTime == 0) //If four seconds have passed since respawn was called
         {
             float move = Input.GetAxis("Horizontal"); //Determines which direction character is moving in
             anim.SetFloat("Speed", Mathf.Abs(move)); //Changes animation to new movement
@@ -68,7 +68,7 @@ public class CharacterController : MonoBehaviour {
 
     private void Update()
     {
-        if (Time.time - deathTime >= 2.5 || deathTime == 0) //If four seconds have passed since respawn was called
+        if (Time.time - deathTime >= 3 || deathTime == 0) //If four seconds have passed since respawn was called
         {
             if (isOnGround && Input.GetButtonDown("Jump")) //If the player is on the ground and presses the jump button
             {
@@ -76,27 +76,28 @@ public class CharacterController : MonoBehaviour {
                 anim.SetBool("Ground", false); //Player is no longer on the ground
                 GetComponent<Rigidbody2D>().AddForce(new Vector2(0, jumpForce)); //Add upwards force ot the character
             }
+            if (Input.GetButton("Horizontal"))
+            {
+                anim.SetBool("IsMoving", true);
+            }
+            else
+            {
+                anim.SetBool("IsMoving", false);
+            }
             deathTime = 0; //Once the player is able to move again, reset deathTime to 0
         }
 
         if (isInDeath == true) //Checks if StartRespawn has been called
         {
             anim.SetBool("IsDead", true); //When Respawn is called, set the "IsDead" parameter to true
-            if (Time.realtimeSinceStartup - deathTime >= 4) //Once three seconds have passed
+            if (Time.realtimeSinceStartup - deathTime >= 2.5) //Once three seconds have passed
             {
                 Respawn();
                 GetComponent<Rigidbody2D>().velocity = new Vector2(0, 0);
             }
         }
 
-        if(Input.GetButton("Horizontal"))
-        {
-            anim.SetBool("IsMoving",true);
-        }
-        else
-        {
-            anim.SetBool("IsMoving", false);
-        }
+
     }
 
     void Flip() //Flips the character animation
@@ -128,18 +129,15 @@ public class CharacterController : MonoBehaviour {
            isInDeath = false;
             if (currentCheckpoint == null) //If there is no current checkpoint
             {
-            Debug.Log("Character Respawned");
-            transform.position = firstCheckpoint.transform.position; //Transfer player to checkpoint position
-            anim.SetBool("IsDead", false);
-        }
+                 transform.position = firstCheckpoint.transform.position; //Transfer player to checkpoint position
+                 anim.SetBool("IsDead", false);
+            }
             else //If there is a current checkpoint
             {
-                Debug.Log("Character Respawned");
                 transform.position = currentCheckpoint.transform.position; //Transfer player to checkpoint position
                 anim.SetBool("IsDead", false);
-        }
-            
-       
+            }
+            anim.SetFloat("Speed", 0);
     }
 
 }
