@@ -43,12 +43,13 @@ public class Pickups : MonoBehaviour {
         {
             numberOfPickups--;
             sound.PickupSound();
-            if(numberOfPickups==0)
+            if(numberOfPickups<=0)
             {
                 door.Unlock(); //Calls PickedUp method from Door class
             }
             Debug.Log("Player picked up Object");
-            this.gameObject.SetActive(false);
+            this.gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            this.gameObject.GetComponent<CircleCollider2D>().enabled = false;
             this.transform.GetComponentInChildren<ParticleSystem>().gameObject.SetActive(false);
         }
     }
