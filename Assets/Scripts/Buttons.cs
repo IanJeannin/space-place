@@ -2,9 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Buttons : MonoBehaviour {
-
-   
+public class Buttons : MonoBehaviour 
+{
     private bool isPlayerInTrigger; //Checks if player character is currently within the trigger
     [SerializeField]
     private bool isActive=false; //Checks if button been pressed, can be changed in editor so that button is inactive at start
