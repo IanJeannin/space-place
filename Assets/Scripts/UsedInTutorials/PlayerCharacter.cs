@@ -3,8 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class PlayerCharacter : MonoBehaviour {
+public class PlayerCharacter : MonoBehaviour
+{
+    //==================================================================================================================
+    //This Class was only used for the tutorials finished in this project, this class is irrelevant to the final project
+    //==================================================================================================================
 
+    #region SerializeFields
     [SerializeField]
     Rigidbody2D rb2d;
     [SerializeField]
@@ -23,12 +28,14 @@ public class PlayerCharacter : MonoBehaviour {
     private PhysicsMaterial2D playerStoppingPhysicsMaterial;
     [SerializeField]
     private Collider2D playerGroundCollider;
+    #endregion
 
-
+    #region PrivateVariables
     private Checkpoints currentCheckpoint;
     private float horizontalInput;
     private bool isOnGround;
     private Collider2D[] groundHitDetectionResults = new Collider2D[16];
+    #endregion
 
     // Update is called once per frame
     void Update()
@@ -36,8 +43,6 @@ public class PlayerCharacter : MonoBehaviour {
         UpdateIsOnGround();
         GetMovementInput();
         Jump();
-
-
     }
 
     private void FixedUpdate()

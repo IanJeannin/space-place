@@ -5,10 +5,11 @@ using UnityEngine;
 public class Buttons : MonoBehaviour 
 {
     private bool isPlayerInTrigger; //Checks if player character is currently within the trigger
+
     [SerializeField]
     private bool isActive=false; //Checks if button been pressed, can be changed in editor so that button is inactive at start
     [SerializeField]
-    SoundManager sound;
+    private SoundManager sound;
 
     private void OnTriggerEnter2D(Collider2D collision) //If an object enters the collider
     {
@@ -41,7 +42,6 @@ public class Buttons : MonoBehaviour
                 isActive = true;
                 GetComponent<SpriteRenderer>().enabled = true; //show the unpressed button renderer
             }
-            
         }
     }
 

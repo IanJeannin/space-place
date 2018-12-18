@@ -2,40 +2,21 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class Pickups : MonoBehaviour {
-
+public class Pickups : MonoBehaviour
+{
+    #region PrivateVariables
     private float min = 1f;
     private float max = 2f;
+    #endregion
+
+    #region SerializeFields
     [SerializeField]
     private float numberOfPickups = 1;
     [SerializeField]
-    Door door;
+    private Door door;
     [SerializeField]
-    SoundManager sound;
-    //public Door door;
-    // Use this for initialization
-    void Start () {
-		
-	}
-	
-	// Update is called once per frame
-	void Update ()
-    {
-       /* if (Time.time <min)
-        {
-            transform.position = new Vector2(transform.position.x, transform.position.y + (float)(1*0.00125));
-        }
-        else if(Time.time>=min&&Time.time<max)
-        {
-            transform.position = new Vector2(transform.position.x, transform.position.y +(float) (1*0.00125));
-        }
-        else
-        {
-            min += 2;
-            max += 2;
-        }
-        */
-	}
+    private SoundManager sound;
+    #endregion
 
     private void OnTriggerEnter2D(Collider2D collision)
     {

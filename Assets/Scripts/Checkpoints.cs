@@ -5,20 +5,23 @@ using UnityEngine.SceneManagement;
 
 public class Checkpoints : MonoBehaviour
 {
+    #region PrivateVariables
+    //Bools automatically start as false
+    private bool isActivated;
+    private SpriteRenderer spriteRenderer;
+    private AudioSource audioSource;
+    #endregion
+
+    #region SerializeFields
     [SerializeField]
     private float inactivatedRotationSpeed=100, activatedRotationSpeed=300;
     [SerializeField]
     private float inactivatedScale = 1, activatedScale = 1.5f;
     [SerializeField]
     private Color inactivatedColor, activatedColor;
-
     [SerializeField]
-    SoundManager sound;
-
-    //Bools automatically start as false
-    private bool isActivated;
-    private SpriteRenderer spriteRenderer;
-    private AudioSource audioSource;
+    private SoundManager sound;
+    #endregion
 
     private void Start()
     {
@@ -49,7 +52,6 @@ public class Checkpoints : MonoBehaviour
         {
             color = activatedColor;
         }
-
         spriteRenderer.color = color;
     }
     private void UpdateScale()
@@ -77,7 +79,6 @@ public class Checkpoints : MonoBehaviour
             Debug.Log("Player entered Checkpoint");
             CharacterController player = collision.GetComponent<CharacterController>();
             player.SetCurrentCheckpoint(this);
-            //audioSource.Play();
         }
     }
 

@@ -3,29 +3,19 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class Door : MonoBehaviour {
-
+public class Door : MonoBehaviour
+{
+    #region SerializeFields
     [SerializeField]
     private string sceneToLoad;
-    private bool isUnlocked = false;
     [SerializeField]
-    SoundManager sound;
+    private SoundManager sound;
+    #endregion
 
+    #region PrivateVariables
+    private bool isUnlocked = false;
     private bool isPlayerInTrigger;
-    
-
-    //Can't use this because player has two colliders, triggers twice
-
-    //private void OnTriggerStay2D(Collider2D collision)
-    //{
-    //    if (collision.CompareTag("Player"))
-    //    {
-    //        if(Input.GetButtonDown("Activate"))
-    //        {
-    //            Debug.Log("Player activated Door!");
-    //        }
-    //    }
-    //}
+    #endregion
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
@@ -45,7 +35,6 @@ public class Door : MonoBehaviour {
 
     private void Update()
     {
-        
         if (isUnlocked == true) //If all the pickups are collected
         {
             this.gameObject.GetComponent<SpriteRenderer>().enabled = true; //Enable the sprite
