@@ -56,3 +56,6 @@ TagManager:
   - name: DoorsAndPickups
     uniqueID: 1888704243
     locked: 0
+  - name: Player
+    uniqueID: 2502965855
+    locked: 0

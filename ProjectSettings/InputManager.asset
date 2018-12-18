@@ -298,9 +298,9 @@ InputManager:
     descriptiveName: 
     descriptiveNegativeName: 
     negativeButton: 
-    positiveButton: up
+    positiveButton: e
     altNegativeButton: 
-    altPositiveButton: w
+    altPositiveButton: down
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
@@ -316,7 +316,7 @@ InputManager:
     negativeButton: 
     positiveButton: e
     altNegativeButton: 
-    altPositiveButton: 
+    altPositiveButton: down
     gravity: 1000
     dead: 0.001
     sensitivity: 1000
